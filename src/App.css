@@ -1,3 +1,4 @@
+@import '~antd/dist/antd.css';
 .App {
   text-align: center;
 }
@@ -35,4 +36,24 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.side-container{
+  background-color: white;
+  padding:45px 70px;
+  border-radius: 15px;
+  border:1px solid #ddd
+}
+.layout-container{
+  background-color: #eee;
+  padding: 50px;
+  height: 100vh;
+}
+.layout-container{
+  display: block !important;
+  text-align: left;
+}
+.ant-form-item{
+  margin-bottom:10px !important;
 }
