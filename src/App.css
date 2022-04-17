@@ -78,3 +78,12 @@
 }
 .final-price{color: #4171ed !important;}
 .tag{display: block;width: fit-content;padding: 3px 20px}
+.summery-container{
+    margin: 30px;
+    border-radius: 20px;
+    border:1px solid #ddd
+}
+.total-payment span ,.total-payment h3{
+    color: #4171ed !important;
+    font-weight: bold;
+}

@@ -1,7 +1,8 @@
 import React, {useState} from "react"
-import {Layout,Space} from "antd";
+import {Layout,Space,Divider} from "antd";
 import Panel from "../Panel/Panel";
 import ListContainer from "../ListContainer/ListContainer"
+import TotalPrice from "../TotalPrice/TotalPrice";
 
 const {Content,Sider} = Layout
 const Main = () =>{
@@ -13,6 +14,8 @@ const Main = () =>{
                 </Sider>
                 <Content>
                     <ListContainer data={formData}/>
+                    <Divider />
+                    <TotalPrice data={formData}/>
                 </Content>
         </Layout>
     )
