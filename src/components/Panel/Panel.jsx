@@ -22,12 +22,12 @@ const Panel = ({setFormData}) => {
                     </Form.Item>
                 </Form.Item>
                 <Form.Item label="discount" name={"discount"} labelAlign={"left"} labelCol={{span: 24}}>
-                    <Slider onChange={value => setDisc(value)} min={0} max={100} defaultValue={0}/>
+                    <Slider tipFormatter={(value)=>`${value}%`} onChange={value => setDisc(value)} min={0} max={100} defaultValue={0}/>
                 </Form.Item>
                 <Form.Item>
                     <span>Final Price :</span>
                     <span style={{padding: "0 5px", fontWeight: "bold", fontSize: "24px"}}>
-                        {price - (price*disc/100)}
+                        {price - (price*disc/100)} $
                     </span>
                 </Form.Item>
                 <Form.Item>
