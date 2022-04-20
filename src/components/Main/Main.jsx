@@ -1,16 +1,24 @@
-import React, {useEffect, useState} from "react"
-import {Layout,Modal,Divider} from "antd";
+import React, {useState} from "react"
+import {Layout, Modal, Divider, Form} from "antd";
 import Panel from "../Panel/Panel";
 import ListContainer from "../ListContainer/ListContainer"
 import TotalPrice from "../TotalPrice/TotalPrice";
 import {uid} from "uid";
-import EditForm from "../EditForm/EditForm";
 const {Content,Sider} = Layout
 
 const Main = () =>{
     const [formData,setFormData] = useState([])
     const [editData,setEditData] = useState()
-
+    const finishAddHandler = (values) =>{
+        setFormData(
+            (prev)=>[
+                ...prev,
+                {
+                    ...values,
+                    id:uid()
+                }
+            ])
+    }
     const finishEditHandler = (values) => {
         let temp = formData.filter (item => item.id !== editData.id)
         temp = [...temp,{
@@ -19,12 +27,11 @@ const Main = () =>{
         }]
         setEditData(null)
         setFormData(temp)
-        Modal.destroyAll()
     }
     return(
         <Layout className={`layout-container `}>
                 <Sider width={500} className={`side-container`} >
-                    <Panel setFormData={setFormData}/>
+                    <Panel editData={editData} setFormData={setFormData} finishHandler={finishAddHandler} submitText={"Add"}/>
                 </Sider>
                 <Content>
                     <ListContainer data={formData} setData={setFormData} setEditData={setEditData}/>
@@ -32,7 +39,7 @@ const Main = () =>{
                     <TotalPrice data={formData}/>
                 </Content>
                 <Modal  destroyOnClose={true} title={"Edit Products"} visible={editData} onCancel={()=>setEditData(null)} footer={null}>
-                    <EditForm editData={editData} finishHandler={finishEditHandler} />
+                    <Panel editData={editData} setFormData={setFormData} finishHandler={finishEditHandler} submitText={"Save"}/>
                 </Modal>
         </Layout>
     )

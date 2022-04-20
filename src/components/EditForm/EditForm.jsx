@@ -14,7 +14,7 @@ const EditForm = ({editData,finishHandler}) =>{
             >
                 <Form.Item label="name" labelAlign={"left"} labelCol={{span: 24}}>
                     <Form.Item name="name" rules={[{required: true, message: "Name is Required"}]}>
-                        <Input size={"large"} placeholder="edit your product name" value={name} />
+                        <Input size={"large"} placeholder="edit your product name" />
                     </Form.Item>
                 </Form.Item>
                 <Form.Item label="price" labelAlign={"left"} labelCol={{span: 24}}>
