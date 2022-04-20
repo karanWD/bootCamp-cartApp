@@ -5,11 +5,10 @@ import Panel from "../Panel/Panel";
 const {Title,Text} =Typography
 
 
-const ListContainer = ({data,setData}) => {
-    const [editData,setEditData] = useState()
-    const editHandler = (id)=>{
-        let tempData = data.find(item=>item.id === id)
-        setEditData(tempData)
+const ListContainer = ({data,setData,setEditData}) => {
+
+    const editHandler = (item)=>{
+        setEditData(item)
     }
     const deleteHandler = (id)=>{
         let finalData = data.filter(item=>item.id !== id)
@@ -39,6 +38,7 @@ const ListContainer = ({data,setData}) => {
                                 </Col>
                                 <Col span={4}>
                                     <Text type={"secondary"} >Discount:</Text>
+                                    {console.log(item)}
                                     <Tag color={"#108ee9"} className={`tag`}>{item?.discount}%</Tag>
                                 </Col>
                                 <Col span={4}>
@@ -50,7 +50,7 @@ const ListContainer = ({data,setData}) => {
                                     <Col>
                                         <Space>
                                             <Button size={"middle"} type={"text"} danger icon={<DeleteOutlined />} onClick={()=>deleteHandler(item?.id)}/>
-                                            <Button size={"middle"} type={"text"} icon={<EditOutlined />} onClick={()=>editHandler(item?.id)}/>
+                                            <Button size={"middle"} type={"text"} icon={<EditOutlined />} onClick={()=>editHandler(item)}/>
                                         </Space>
                                     </Col>
                                 </Col>
@@ -58,9 +58,7 @@ const ListContainer = ({data,setData}) => {
                         </List.Item>
                     )}
                 />
-            <Modal title={"Edit Products"} visible={editData} onCancel={()=>setEditData(null)} footer={null}>
-                <Panel setFormData={setData} editData={editData} setEditData={setEditData}/>
-            </Modal>
+
         </>
 
     )
