@@ -3,23 +3,17 @@ import {uid} from "uid"
 import {Slider, Form, Input, InputNumber, Col, Button, Space} from "antd";
 import {calcFinalPrice} from "../../modules/calcFinalPrice";
 
-const Panel = ({formData, setFormData}) => {
+const Panel = ({data, setFormData}) => {
+    const [count, setCount] = useState(1)
     const [price, setPrice] = useState(0)
     const [disc, setDisc] = useState(0)
-    const [count, setCount] = useState(1)
-    const finishHandler = (values) =>{
-        setFormData(
-            (prev)=>[
-                ...prev,
-                {
-                    ...values,
-                    id:uid()
-                }
-            ])
+    const finishHandler = (values) => {
+        setFormData((prev)=>[...prev,values])
+        data ?
+            localStorage.setItem("cart",JSON.stringify([...data, values]))
+            :
+            localStorage.setItem("cart", JSON.stringify([values]))
     }
-
-
-
     return (
         <>
             <Form onFinish={finishHandler} initialValues={{discount:0}}>
@@ -40,17 +34,18 @@ const Panel = ({formData, setFormData}) => {
                     </Form.Item>
                 </Form.Item>
                 <Form.Item label="discount" name={"discount"} labelAlign={"left"} labelCol={{span: 24}}>
-                    <Slider tipFormatter={(value)=>`${value}%`} onChange={value => setDisc(value)} min={0} max={100}/>
+                    <Slider tipFormatter={(value) => `${value}%`} onChange={value => setDisc(value)} min={0} max={100}
+                            defaultValue={0}/>
                 </Form.Item>
                 <Form.Item>
                     <span>Final Price :</span>
                     <span style={{padding: "0 5px", fontWeight: "bold", fontSize: "24px"}}>
-                        {/*{count * (price - (price * disc / 100))} $*/}
-                        {calcFinalPrice(price,disc,count)}$
+                        {price - (price * disc / 100)} $
                     </span>
                 </Form.Item>
                 <Form.Item>
-                    <Button htmlType={"submit"} shape={"round"} type="primary" block style={{marginTop: "30px", height: "50px"}} size={"large"}>
+                    <Button htmlType={"submit"} shape={"round"} type="primary" block
+                            style={{marginTop: "30px", height: "50px"}} size={"large"}>
                         Add
                     </Button>
                 </Form.Item>
