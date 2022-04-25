@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {uid} from "uid"
 import {Slider, Form, Input, InputNumber, Col, Button, Space} from "antd";
+import {calcFinalPrice} from "../../modules/calcFinalPrice";
 
 const Panel = ({formData, setFormData}) => {
     const [price, setPrice] = useState(0)
@@ -44,7 +45,8 @@ const Panel = ({formData, setFormData}) => {
                 <Form.Item>
                     <span>Final Price :</span>
                     <span style={{padding: "0 5px", fontWeight: "bold", fontSize: "24px"}}>
-                        {count * (price - (price * disc / 100))} $
+                        {/*{count * (price - (price * disc / 100))} $*/}
+                        {calcFinalPrice(price,disc,count)}$
                     </span>
                 </Form.Item>
                 <Form.Item>
