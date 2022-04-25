@@ -13,6 +13,7 @@ const ListContainer = ({data,setData,setEditData}) => {
     const deleteHandler = (id)=>{
         let finalData = data.filter(item=>item.id !== id)
         setData(finalData)
+        localStorage.setItem("cart",JSON.stringify(finalData))
     }
     return (
         <>

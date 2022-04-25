@@ -10,9 +10,9 @@ const Panel = ({data, setFormData}) => {
     const finishHandler = (values) => {
         setFormData((prev)=>[...prev,values])
         data ?
-            localStorage.setItem("cart",JSON.stringify([...data, values]))
+            localStorage.setItem("cart",JSON.stringify([...data, {...values,id:uid()}]))
             :
-            localStorage.setItem("cart", JSON.stringify([values]))
+            localStorage.setItem("cart", JSON.stringify([{...values,id:uid()}]))
     }
     return (
         <>
@@ -40,7 +40,7 @@ const Panel = ({data, setFormData}) => {
                 <Form.Item>
                     <span>Final Price :</span>
                     <span style={{padding: "0 5px", fontWeight: "bold", fontSize: "24px"}}>
-                        {price - (price * disc / 100)} $
+                        {calcFinalPrice(price,disc,count)} $
                     </span>
                 </Form.Item>
                 <Form.Item>

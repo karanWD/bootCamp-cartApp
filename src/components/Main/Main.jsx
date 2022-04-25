@@ -8,7 +8,10 @@ import EditForm from "../EditForm/EditForm";
 const {Content,Sider} = Layout
 const Main = () =>{
     const [editData,setEditData] = useState()
-
+    const [formData,setFormData] = useState(()=>{
+        const local = localStorage.getItem("cart")
+        return local ? JSON.parse(local) : []
+    })
     const finishEditHandler = (values) => {
         let temp = formData.filter (item => item.id !== editData.id)
         temp = [...temp,{
@@ -17,12 +20,10 @@ const Main = () =>{
         }]
         setEditData(null)
         setFormData(temp)
+        localStorage.setItem("cart",JSON.stringify(temp))
         Modal.destroyAll()
     }
-    const [formData,setFormData] = useState(()=>{
-        const local = localStorage.getItem("cart")
-        return local ? JSON.parse(local) : []
-    })
+
     return(
         <Layout className={`layout-container `}>
                 <Sider width={500} className={`side-container`} >
